@@ -86,3 +86,15 @@ def getAtividadeById(idAtividade):
         return jsonify(atividades), 200
     except:
         return jsonify("Atividade não encontrada."), 400
+    
+
+@routes.route("/atividade/<int:idAtividade>", methods=["DELETE"])
+def deleteAtividade(idAtividade):
+    try:
+        atividade = model_atividade.Atividade.query.get(idAtividade)
+        db.session.delete(atividade)
+        db.session.commit()
+        return jsonify("Atividade deletada com sucesso!"), 200
+    
+    except:
+        return jsonify("Turma não encontrada."), 400
